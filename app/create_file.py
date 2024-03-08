@@ -5,10 +5,19 @@ from os import mkdir, chdir
 filename = ""
 directories = []
 
+# Use function with descriptive name to cover up some logic
+# Remember about KISS and DRY code principle
+# Variable should be specified inside function or classes to prevent any conflicts.
+# Global vars we can use for values that are not supposed to be changed during the run
+
 if "-f" in argv:
+    # Instead of if/else, if you have multiple flags/options
+    # better to user dicts and enums like:
+    # flags: dict = {"-f": some_function}
     index = 0
 
     for _ in range(len(argv) - 1):
+        # The _ sign can be used only if we need to receive some value, but we are not going to use it
         index += 1
         if argv[_: _ + 1] == ["-f"]:
             break
@@ -49,6 +58,8 @@ for directory in directories:
     try:
         mkdir(directory)
     except Exception:
+        # Better to user your own Exception class with descriptive name instead of regular exception
+        # MyException(Exception): pass
         pass
     chdir(directory)
 
